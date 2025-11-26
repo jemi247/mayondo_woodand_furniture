@@ -1,0 +1,16 @@
+extends layout 
+block content
+  head
+    meta(charset='UTF-8')
+    title Login User
+    link(rel='stylesheet' href='/css/user.css')
+  header
+    h1 Login
+  section
+    form(action='' method='POST')
+      label Email:
+      input(type='email' name='email' placeholder='Enter email' required='')
+      label Password:
+      input(type='password' name='password' placeholder='Enter password' required='')
+      button(type='submit') Login User
+  script(src='js/mayondo.js')

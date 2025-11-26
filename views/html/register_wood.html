@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Register Wood Stock</title>
+<link rel="stylesheet" href="css/wood.css">
+</head>
+<body>
+<header>
+<h1>Register Wood Stock</h1>
+<a href="landing.html">← Back to Home</a>
+</header>
+
+<section>
+<form>
+<label>Wood Type:</label>
+<input type="text" placeholder="e.g. Mahogany" required>
+
+<label>Quantity (in logs):</label>
+<input type="number" min="1" required>
+
+<label>Supplier Name:</label>
+<input type="text" required>
+
+<label>Cost Price per Unit:</label>
+<input type="number" step="0.01" required>
+
+<label>Date Received:</label>
+<input type="date" required>
+
+<button type="submit">Save Wood Stock</button>
+</form>
+</section>
+<script src="js/mayondo.js"></script>
+</body>
+</html>

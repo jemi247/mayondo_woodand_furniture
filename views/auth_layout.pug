@@ -1,0 +1,40 @@
+doctype html
+html 
+   head        
+     title Mayondo Wood and Furniture Ltd.
+   header
+     nav.navbar 
+       h1.logo Mayondo Wood and Furniture Ltd.
+        if currentUser = && (currentUser.role = 'Manager')
+            ul.nav-links
+                li
+                    a(href="/") Home
+                li
+                    a(href="/registerWood") Add Wood Stock
+                li
+                    a(href="/registerFurniture") Add Furniture Stock
+                li
+                    a(href="/wood") View Wood Stock
+                li 
+                    a(href="/furniture") View Furniture Stock
+                li 
+                    a(href="#") View Sales
+                li
+                    a(href="/logout") Logout
+        if currentUser = && (currentUser.role = 'Sales Agent')
+            ul.nav-links
+                li
+                    a(href="/") Home
+                li
+                    a(href="/wood") View Wood Stock
+                li
+                    a(href="/furniture") View Furniture Stock
+                li
+                    a(href="#") Enter Sale      
+                li
+                    a(href="/logout") Logout
+block content
+
+
+
+   

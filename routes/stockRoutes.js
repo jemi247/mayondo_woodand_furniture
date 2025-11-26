@@ -1,0 +1,151 @@
+const express= require('express');
+const router = express.Router();
+// const connectEnsureLogin = require('connect-ensure-login');
+const multer = require('multer');
+const {ensureAuthenticated, ensureManager, ensureSalesAgent} = require('../customMiddleware/auth')
+
+const Furniture = require("../models/Furniturestock");
+const Wood = require("../models/Woodstock");
+
+// Image upload configs
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'public/images/uploads')
+    },
+    filename:  (req, file, cb) => {
+      cb(null, file.originalname)
+    }
+});
+var upload = multer({ storage: storage });
+
+// connectEnsureLogin.ensureLoggedIn(),
+router.get('/register_wood', ensureAuthenticated, ensureManager, (req, res) => {
+    res.render("register_wood") 
+});
+
+router.post('/register_wood', ensureAuthenticated, ensureManager, async(req, res) => {
+    try {
+        const wood = new Wood(req.body)
+    console.log(wood);
+    await wood.save()
+    res.redirect("/register_wood")
+    } catch (error) {
+        console.error(error)
+         res.redirect("/register_wood")
+    }  
+});
+
+router.get('/register_furniture', ensureAuthenticated, ensureManager, (req, res) => {
+    res.render("register_furniture")
+});
+
+router.post('/register_furniture', ensureAuthenticated, ensureManager, upload.single('furnitureImage'), async(req, res) => {
+    try {
+        const furniture = new Furniture(req.body)
+        furniture.furnitureImage = req.file.path
+        console.log(furniture)
+        await furniture.save()
+        res.redirect("/register_furniture")
+    } catch (error) {
+        console.error(error)
+        res.redirect("/register_furniture")
+    }
+});
+
+// registered stock
+router.get('/wood_list', async(req, res) => {
+    try {
+        const woodStock = await Wood.find();
+        res.render("wood_list", { woodStock })  
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error retrieving wood stock from the database.");
+        res.redirect("/salesagent_dash")
+    }
+});
+
+router.get('/furniture_list', async(req, res) => {
+    try {
+        const furnitureStock = await Furniture.find();
+        res.render("furniture_list", { furnitureStock })  
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error retrieving wood stock from the database.");
+        res.redirect("/salesagent_dash")
+    }
+});
+
+
+
+// update furniture stock
+router.get('/furniture/:id', async(req, res) => {
+    try {
+    const furniture = await Furniture.findOne({_id:req.params.id});
+    res.render("update_furniture", {item:furniture})
+    } catch (error) {
+        res.status(400).send("Unable to find item in the DB!")
+        console.log(error);
+    }
+}); 
+
+router.post('/furniture', async(req, res) => {
+    try {
+    await Furniture.findByIdAndUpdate({_id:req.query.id},req.body);
+    res.redirect("/furniture_list")
+    } catch (error) {
+        res.status(400).send("Unable to find item in the DB!")
+        console.log(error);
+    }
+});
+
+// delete furniture
+router.post('/furniture/:id', async(req, res) => {
+    try {
+    await Furniture.deleteOne({_id:req.body.id});
+    res.redirect("/register_furniture")
+    } catch (error) {
+        res.status(400).send("Unable to delete item in the DB!")
+        console.log(error);
+    }
+});
+
+// update wood stock
+router.get('/wood/:id', async(req, res) => {
+    try {
+    const wood = await Wood.findOne({_id:req.params.id});
+    res.render("update_wood", {item:wood})
+    } catch (error) {
+        res.status(400).send("Unable to find item in the DB!")
+        console.log(error);
+    }
+}); 
+
+router.post('/wood', async(req, res) => {
+    try {
+    await Wood.findByIdAndUpdate({_id:req.query.id},req.body);
+    res.redirect("/wood_list")
+    } catch (error) {
+        res.status(400).send("Unable to find item in the DB!")
+        console.log(error);
+    }
+});
+
+// delete wood
+router.post('/wood/:id', async(req, res) => {
+    try {
+    await Wood.deleteOne({_id:req.body.id});
+    res.redirect("/wood_list")
+    } catch (error) {
+        res.status(400).send("Unable to delete item in the DB!")
+        console.log(error);
+    }
+});
+
+
+
+
+module.exports = router;
+
+// router.get('/registerUser', (req, res) => {
+//     res.render('register_user', { title: 'Register User' });
+// });

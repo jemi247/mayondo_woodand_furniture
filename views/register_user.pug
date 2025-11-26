@@ -1,0 +1,23 @@
+extends layout 
+block content
+  head
+    meta(charset='UTF-8')
+    title Register User
+    link(rel='stylesheet' href='/css/user.css')
+  header
+    h1 Register a New User
+  section
+    form(action='/register_user' method='POST')
+      label Full Name:
+      input(type='text' name='fullname' placeholder='Enter full name' required='')
+      label Email:
+      input(type='email' name='email' placeholder='Enter email' required='')
+      label Role:
+      select(name='role' required='') 
+        option(value='' disabled='' selected='') Select Role
+        option Manager
+        option Sales Agent
+      label Password:
+      input(type='password' name='password' pleceholder='Enter password' required='')
+      button(type='submit') Register User
+  script(src='js/mayondo.js')

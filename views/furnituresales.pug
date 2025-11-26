@@ -1,0 +1,31 @@
+extends layout
+block content
+head
+meta(charset='UTF-8')
+title Furniture Sales
+link(rel="stylesheet", href="wood.css")
+header
+h1 Furniture Sales | Mayondo Wood and Furniture
+  section
+    form(action='' method='POST')
+        label Customer Name:
+        input(type='text' name='customerName' placeholder='e.g. Mahogany' required='')
+        label Furniture Type:
+        input(type='text' name='woodType' required='')
+        label Quantity:
+        input(type='number' name='quantity' required='')
+        label Sale Date:
+        input(type='date' name='saleDate' required='')
+        label Payment Type 
+            select(name='paymentType' required='')
+                option Cash
+                option Cheque 
+                option Bank overdraft
+        label Sales Agent Name 
+        input(type='text' name='agentName' required='')
+      button(type='submit') Register Furniture Sale
+
+
+
+
+ 

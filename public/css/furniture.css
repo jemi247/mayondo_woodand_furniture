@@ -1,0 +1,64 @@
+body {
+background: url('/images/furniture.jpg') no-repeat center center/cover;
+font-family: Arial, sans-serif;
+}
+
+header {
+text-align: center;
+background-color:  rgba(0, 64, 0, 0.65);
+color: white;
+padding: 15px;
+}
+
+nav ul {
+list-style: none;
+margin: 0;
+padding: 0;
+display: flex; 
+justify-content: center; 
+background-color: rgba(34, 139, 34, 0.85); 
+}
+
+nav ul li {
+margin: 0 20px;
+}
+
+nav ul li a {
+text-decoration: none;
+color: white;
+font-weight: bold;
+font-size: 1.1em;
+transition: color 0.3s;
+}
+
+nav ul li a:hover {
+color: gold;
+}
+
+form {
+width: 50%;
+margin: 50px auto;
+background-color: rgba(255,255,255,0.9);
+padding: 30px;
+border-radius: 10px;
+}
+
+label {
+display: block;
+margin-top: 10px;
+font-weight: bold;
+}
+
+input, button {
+width: 100%;
+padding: 10px;
+margin-top: 5px;
+}
+
+button {
+background-color: green;
+color: white;
+border: none;
+border-radius: 5px;
+margin-top: 20px;
+}

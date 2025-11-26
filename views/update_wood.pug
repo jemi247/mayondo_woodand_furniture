@@ -1,0 +1,20 @@
+extends layout 
+block content
+  head
+    meta(charset='UTF-8')
+    title Update Wood Stock
+    link(rel='stylesheet' href='/css/furniture.css')
+  header
+    h1 Update Wood Stock
+  section
+    form(action="/wood?id="+item._id method='POST')
+      label Wood Type:
+      input(type='text' name='woodType' placeholder='e.g. Oak' required='')
+      label Quantity:
+      input(type='number' name='quantity' required='')
+      label Supplier:
+      input(type='text' name='supplier' required='')
+      label Date Received:
+      input(type='date' name='dateReceived' required='')
+      button(type='submit') Update Wood
+  script(src='js/mayondo.js')

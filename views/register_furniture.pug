@@ -1,0 +1,22 @@
+extends layout 
+block content
+  head
+    meta(charset='UTF-8')
+    title Register Furniture Stock
+    link(rel='stylesheet' href='/css/furniture.css')
+  header
+    h1 Register Furniture Stock
+  section
+    form(action='/register_furniture' method='POST' enctype="multipart/form-data")
+      label Furniture Type:
+      input(type='text' name='furnitureType' placeholder='e.g. Sofa Set' required='')
+      label Material:
+      input(type='text' name='material' placeholder='e.g. Mahogany' required='')
+      label Quantity:
+      input(type='number' name='quantity' placeholder='' required='')
+      label Price:
+      input(type='number' name='price' required='')
+      label Upload Image:
+      input(type='file' name='furnitureImage' placeholder='Furniture image' step='0.01' required='')
+      button(type='submit') Register Furniture
+  script(src='js/mayondo.js')
