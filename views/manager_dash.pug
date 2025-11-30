@@ -1,61 +1,68 @@
 extends layout
 block content
     head
-        title Dashboard
-        link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css")
-    body
-        .container
-        nav.navbar.navbar-success.bg-success
-            span.navbar-brand.text-white Manager Dashboard 
-        .card
-            .card-body
-                | Welcome Jacob!
-            .col-md-3
-            .list-group
-                a.list-group-item.list-group-item-success(href="/users") Registered Users
-                a.list-group-item.list-group-item-success(href="/register_furniture") Register Furniture Stock
-                a.list-group-item.list-group-item-success(href="/register_wood") Register Wood Stock
-                a.list-group-item.list-group-item-success(href="/furniture_list") Furniture Stock List
-                a.list-group-item.list-group-item-success(href="/wood_list") Wood Stock List
-                a.list-group-item.list-group-item-success(href="/furnituresales") Furniture Sales
-                a.list-group-item.list-group-item-success(href="/woodsales") Wood Sales
-                a.list-group-item.list-group-item-danger(href="/logout") Logout
-            .col-md-9
-        script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous")       
-
-
-
-    //- head
-    //-     meta(charset='UTF-8')
-    //-     meta(name='viewport' content='width=device-width, initial-scale=1.0')
-    //-     title Manager Dashboard        
-    //- body
-    //-     link(rel="stylesheet", href="/css/manager_dash.css")
-    //-     header
-    //-         h1 Manager Dashboard
-    //-         .nav 
-    //-             ul
-    //-                 li 
-    //-                     a(href='/users') Registered Users
-    //-                 li 
-    //-                     a(href='/register_furniture') Register Furniture Stock
-    //-                 li 
-    //-                     a(href='/register_wood') Register Wood Stock
-    //-                 li 
-    //-                     a(href='/furniture') Furniture Stock List
-    //-                 li 
-    //-                     a(href='/wood') Wood Stock List
-    //-                 li 
-    //-                     a(href='#') Furniture Sales
-    //-                 li 
-    //-                     a(href='#') Wood sales
-    //-                 li 
-    //-                     a(href='/logout') Logout
-    //-     main 
-    //-         section 
-    //-             h2 Registered Users 
-    //-             table 
-    //-                 tr
-    //-                     th Name 
-    //-                     th Email 
-    //-                     th Role
+        meta(charset='UTF-8')
+        title Manager Dashboard
+        link(rel="stylesheet", href="/css/dashboard.css")
+    header
+        h1 Manager Dashboard
+        h3 Welcome #{fullName}!
+    nav.sidebar
+        ul.sidebar-links 
+            li 
+                a(href='/users') Registered Users
+            li 
+                a(href='/register_wood') Register Wood Stock
+            li 
+                a(href='/register_furniture') Register Furniture Stock
+            li 
+                a(href='/reg_furnituresale') Register Furniture Sales
+            li
+                a(href='/reg_woodsale') Register Wood Sales
+            li 
+                a(href='/wood_list') Wood Stock List
+            li 
+                a(href='/furniture_list') Furniture Stock List
+            li 
+                a(href='/logout') Logout
+    main
+        section.cards 
+            .card 
+                h4 Total Wood Stock 
+                p Quantity of Hardwood in stock: #{totalHardWood.totalQuantity} Pieces 
+                p Quantity of Softwood in stock: #{totalSoftWood.totalQuantity} Pieces 
+                p Quantity of Timber in stock: #{totalTimber.totalQuantity} Pieces 
+                p Quantity of Poles in stock: #{totalPoles.totalQuantity} Pieces
+            .card
+                h4 Total Furniture Stock 
+                p Quantity of Chairs in stock: #{totalChairs.totalQuantity} Pieces 
+                p Quantity of Sofas in stock: #{totalSofas.totalQuantity} Pieces 
+                p Quantity of Cupboards in stock: #{totalCupboards.totalQuantity} Pieces 
+                p Quantity of Beds in stock: #{totalBeds.totalQuantity} Pieces
+            .card
+                h4 Total Expenses 
+                p Expenses on HardWood: #{totalHardWood.totalCost} UGX
+                p Expenses on Softwood: #{totalSoftWood.totalCost} UGX
+                p Expenses on Timber: #{totalTimber.totalCost} UGX
+                p Expenses on Poles: #{totalPoles.totalCost} UGX
+                p Total: #{new Intl.NumberFormat().format((totalHardWood.totalCost) + (totalSoftWood.totalCost) + (totalTimber.totalCost) + (totalPoles.totalCost))} UGX
+            .card
+                h4 Total Revenue
+                p #{new Intl.NumberFormat().format(totalRevenue)} UGX
+            .card
+                h4 Profits 
+                p #{new Intl.NumberFormat().format(grossProfit)} UGX
+            .card#low-stock-alerts
+                h5 Low Stock Alerts     
+                if lowWoodStock.length > 0
+                    ul
+                        each item in lowWoodStock
+                            li #{item.name} - #{item.quantity} Pieces Remaining
+                else
+                    p No low stock alerts.
+                if lowFurnitureStock.length > 0
+                    ul
+                        each item in lowFurnitureStock
+                            li #{item.name} - #{item.quantity} Pieces Remaining
+                else
+                    p No low stock alerts.

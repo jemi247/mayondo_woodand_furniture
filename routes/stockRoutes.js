@@ -4,8 +4,8 @@ const router = express.Router();
 const multer = require('multer');
 const {ensureAuthenticated, ensureManager, ensureSalesAgent} = require('../customMiddleware/auth')
 
-const Furniture = require("../models/Furniturestock");
-const Wood = require("../models/Woodstock");
+const furnitureStock = require("../models/Furniturestock");
+const woodStock = require("../models/Woodstock");
 
 // Image upload configs
 var storage = multer.diskStorage({
@@ -23,15 +23,15 @@ router.get('/register_wood', ensureAuthenticated, ensureManager, (req, res) => {
     res.render("register_wood") 
 });
 
-router.post('/register_wood', ensureAuthenticated, ensureManager, async(req, res) => {
+router.post('/register_wood', async(req, res) => {
     try {
-        const wood = new Wood(req.body)
+        const wood = new woodStock(req.body)
     console.log(wood);
     await wood.save()
     res.redirect("/register_wood")
     } catch (error) {
         console.error(error)
-         res.redirect("/register_wood")
+        res.status(500).send("Error registering wood stock.");
     }  
 });
 
@@ -39,9 +39,9 @@ router.get('/register_furniture', ensureAuthenticated, ensureManager, (req, res)
     res.render("register_furniture")
 });
 
-router.post('/register_furniture', ensureAuthenticated, ensureManager, upload.single('furnitureImage'), async(req, res) => {
+router.post('/register_furniture', upload.single('furnitureImage'), async(req, res) => {
     try {
-        const furniture = new Furniture(req.body)
+        const furniture = new furnitureStock(req.body)
         furniture.furnitureImage = req.file.path
         console.log(furniture)
         await furniture.save()
@@ -55,7 +55,7 @@ router.post('/register_furniture', ensureAuthenticated, ensureManager, upload.si
 // registered stock
 router.get('/wood_list', async(req, res) => {
     try {
-        const woodStock = await Wood.find();
+        const woodStocks = await woodStock.find();
         res.render("wood_list", { woodStock })  
     } catch (error) {
         console.error(error);
@@ -66,7 +66,7 @@ router.get('/wood_list', async(req, res) => {
 
 router.get('/furniture_list', async(req, res) => {
     try {
-        const furnitureStock = await Furniture.find();
+        const furnitureStocks = await furnitureStock.find();
         res.render("furniture_list", { furnitureStock })  
     } catch (error) {
         console.error(error);
@@ -80,8 +80,8 @@ router.get('/furniture_list', async(req, res) => {
 // update furniture stock
 router.get('/furniture/:id', async(req, res) => {
     try {
-    const furniture = await Furniture.findOne({_id:req.params.id});
-    res.render("update_furniture", {item:furniture})
+    const furnitures = await furnitureStock.findOne({_id:req.params.id});
+    res.render("update_furniture", {item:furnitures})
     } catch (error) {
         res.status(400).send("Unable to find item in the DB!")
         console.log(error);
@@ -90,7 +90,7 @@ router.get('/furniture/:id', async(req, res) => {
 
 router.post('/furniture', async(req, res) => {
     try {
-    await Furniture.findByIdAndUpdate({_id:req.query.id},req.body);
+    await furnitureStock.findByIdAndUpdate({_id:req.query.id},req.body);
     res.redirect("/furniture_list")
     } catch (error) {
         res.status(400).send("Unable to find item in the DB!")
@@ -101,7 +101,7 @@ router.post('/furniture', async(req, res) => {
 // delete furniture
 router.post('/furniture/:id', async(req, res) => {
     try {
-    await Furniture.deleteOne({_id:req.body.id});
+    await furnitureStock.deleteOne({_id:req.body.id});
     res.redirect("/register_furniture")
     } catch (error) {
         res.status(400).send("Unable to delete item in the DB!")
@@ -112,8 +112,8 @@ router.post('/furniture/:id', async(req, res) => {
 // update wood stock
 router.get('/wood/:id', async(req, res) => {
     try {
-    const wood = await Wood.findOne({_id:req.params.id});
-    res.render("update_wood", {item:wood})
+    const woods = await woodStock.findOne({_id:req.params.id});
+    res.render("update_wood", {item:woods})
     } catch (error) {
         res.status(400).send("Unable to find item in the DB!")
         console.log(error);
@@ -122,7 +122,7 @@ router.get('/wood/:id', async(req, res) => {
 
 router.post('/wood', async(req, res) => {
     try {
-    await Wood.findByIdAndUpdate({_id:req.query.id},req.body);
+    await woodStock.findByIdAndUpdate({_id:req.query.id},req.body);
     res.redirect("/wood_list")
     } catch (error) {
         res.status(400).send("Unable to find item in the DB!")
@@ -133,7 +133,7 @@ router.post('/wood', async(req, res) => {
 // delete wood
 router.post('/wood/:id', async(req, res) => {
     try {
-    await Wood.deleteOne({_id:req.body.id});
+    await woodStock.deleteOne({_id:req.body.id});
     res.redirect("/wood_list")
     } catch (error) {
         res.status(400).send("Unable to delete item in the DB!")

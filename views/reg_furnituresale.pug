@@ -1,0 +1,62 @@
+extends layout
+block content
+  head
+    meta(charset='UTF-8')
+    title Register Furniture Sale
+    link(rel="stylesheet", href="/css/furniture.css")
+  header
+    h1 Furniture Sale 
+  section
+    form(action='/reg_furnituresale' method='POST')
+      label Customer Name:
+      input(type='text' name='customerName' required='')
+      label Furniture Type:
+      select(name="furnitureType")
+        option(value='' disabled='' selected='') Select Furniture Type
+        option Chair
+        option Table
+        option Sofa
+        option Bed
+        option Wardrobe
+        option Dresser
+        option Cupboard
+        option Dining set
+        option Cabinet
+      label Material:
+      select(name='material')
+        option(value='' disabled='' selected='') Select Material
+        option Mahogany
+        option Acacia
+        option Oak
+        option Pine
+        option Douglas Fir 
+        option Spruce 
+        option Mvule
+        option Eucalyptus
+      label Quantity:
+      input(type='number' name='quantity' required='')
+      label Furniture Price: 
+      input(type="number" name="furniturePrice" required='')
+      label Sale Date:
+      input(type='date' name='saleDate' required='')
+      label Payment Type 
+      select(name='paymentType')
+        option(value='' disabled='' selected='') Select Payment Type
+        option Cash
+        option Cheque 
+        option Bank overdraft
+      label Transport Provided
+      select(name='transportProvided')
+        option(value='' disabled='' selected='') Select Transport Option
+        option(value='true') Yes
+        option(value='false') No
+      label Total Price
+      input(type='number' name='totalPrice' required='')
+      label Sales Agent Name 
+      input(type='text' name='agentName' required='')
+      button(type='submit') Register Furniture Sale
+
+
+
+
+ 

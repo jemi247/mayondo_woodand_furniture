@@ -4,6 +4,9 @@ const woodsaleSchema = new mongoose.Schema({
     customerName: {
         type: String,
     },
+    woodName: {
+        type: String,
+    },
     woodType: {
         type: String,
     },
@@ -13,11 +16,19 @@ const woodsaleSchema = new mongoose.Schema({
     saleDate: {
         type: String,
     },
+    woodPrice: {
+        type: Number,
+    },
     paymentType: {
-        type: String,
+        type: Boolean,
+        default: false,
+    },
+    totalPrice: {
+        type: Number,
     },
     agentName: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Registration"
     }
 });
 

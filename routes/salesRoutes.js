@@ -1,29 +1,17 @@
 const express= require('express');
 const router = express.Router();
 const {ensureAuthenticated, ensureManager, ensureSalesAgent} = require('../customMiddleware/auth')
-const woodsale = require("../models/Woodsale");
-const furnituresale = require("../models/Furnituresale");
+const woodSale = require("../models/Woodsale");
+const furnitureSale = require("../models/Furnituresale");
 
-router.get("/furnituresales", (req,res) => {
-    res.render("furnituresales")
+router.get("/reg_furnituresale", (req,res) => {
+    res.render("reg_furnituresale")
 });
 
-router.post("/furnituresales", async(req,res) => {
+router.post("/reg_furnituresale", async(req,res) => {
     try {
-        res.redirect("/#")
-    } catch (error) {
-      console.error(error)  
-    } 
-});
-
-router.get("/woodsales", (req,res) => {
-    res.render("woodsales")
-});
-
-router.post("/woodsales", async(req,res) => {
-    try {
-        const { customerName, woodType, quantity, saleDate, paymentType, agentname } = req.body;
-        const stocks = await Woodstock.find({woodName:woodType})
+        const { customerName, furnitureName, furnitureType, quantity, saleDate, paymentType, transportProvided, agentName, totalPrice } = req.body;
+        const stocks = await furnitureStock.find({furnitureName:furnitureType})
         if(!stocks || stocks.length === 0)
             return res.status(400).send("Stock not found!")
         // calculate total available quantity across all stock entries
@@ -34,7 +22,52 @@ router.post("/woodsales", async(req,res) => {
         let total = salePrice * Number(quantity)
         if(transportProvided)
             total *= 1.05;
-        const sale = new woodsale({
+        const sale = new furnitureSale({
+            customerName, 
+            furnitureType, 
+            quantity, 
+            saleDate, 
+            paymentType, 
+            agentname: req.user._id,
+            transportProvided: !!transportProvided,
+            totalPrice: total
+        })
+        await sale.save();
+        // deduct quantity sold from the stock
+        let remainingToDeduct = Number(quantity)
+        for (const stock of stocks) {
+            if (remainingToDeduct <= 0) break;
+            const deductFromThis = Math.min(stock.quantity, remainingToDeduct)
+            stock.quantity -= deductFromThis
+            remainingToDeduct -= deductFromThis
+            await stock.save();
+        }
+        res.redirect("/reg_furnituresale")
+    } catch (error) {
+      console.error(error) 
+        res.status(500).send("Server error"); 
+    } 
+});
+
+router.get("/reg_woodsale", (req,res) => {
+    res.render("reg_woodsale")
+});
+
+router.post("/reg_woodsale", async(req,res) => {
+    try {
+        const { customerName, woodName, woodType, quantity, saleDate, woodPrice, paymentType, transportProvided, agentName, totalPrice } = req.body;
+        const stocks = await woodStock.find({woodName:woodType})
+        if(!stocks || stocks.length === 0)
+            return res.status(400).send("Stock not found!")
+        // calculate total available quantity across all stock entries
+        const totalAvailable = stocks.reduce((sum,stock) => sum + stock.quantity, 0)
+        if(totalAvailable < Number(quantity))
+            return res.status(400).send("Insufficient stock!")
+        // calculate total price
+        let total = salePrice * Number(quantity)
+        if(transportProvided)
+            total *= 1.05;
+        const sale = new woodSale({
             customerName, 
             woodType, 
             quantity, 
@@ -54,7 +87,7 @@ router.post("/woodsales", async(req,res) => {
             remainingToDeduct -= deductFromThis
             await stock.save();
         }
-        res.redirect("/#");
+        res.redirect("/reg_woodsale");
     } catch (error) {
         console.error(error);
         res.status(500).send("Server error");

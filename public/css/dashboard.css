@@ -1,0 +1,102 @@
+body {
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  background: url('/images/uploads/furniture9.jpg') no-repeat center center/cover;
+  background-color: #f5f7f4; 
+  line-height: 1.6;
+}
+
+nav ul {
+list-style: none;
+margin: 0;
+padding: 0;
+display: flex; 
+justify-content: center; 
+background-color: rgba(34, 139, 34, 0.85); 
+}
+
+nav ul li {
+margin: 0 20px;
+}
+
+nav ul li a {
+text-decoration: none;
+color: white;
+font-weight: bold;
+font-size: 1.1em;
+transition: color 0.3s;
+}
+
+nav ul li a:hover {
+color: gold;
+}
+
+nav.sidebar {
+height: 130vh;
+width: 250px;
+position: fixed;
+top: 0;
+left: 0;
+background-color: #228b22;
+padding-top: 60px;
+transform: translateX(0);
+transition: transform 0.3s ease-in-out;
+}
+
+nav.sidebar ul {
+flex-direction: column;
+align-items: flex-start;
+}
+
+nav.sidebar ul li {
+margin: 10px 0;
+width: 100%;
+text-align: left;
+padding-left: 0px;
+}
+
+nav.sidebar ul li a {
+display: flex;
+flex-direction: column;
+width: 100%;
+padding: 1px 0;
+border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+header {
+  position: relative;
+  height: 20vh;
+  text-align: center;
+}
+
+main {
+margin-left: 250px; 
+padding: 20px;
+}
+
+.cards {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 3fr));
+gap: 2rem;
+margin-top: 2rem;
+}
+
+.card {
+background: #fff;
+border-radius: 1rem;
+overflow: hidden;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+transform: translateY(-5px);
+box-shadow: 0 8px 16px rgb(89, 148, 2);
+}
+
+#low-stock-alerts {
+  background-color: #ffcccc;
+  border: 2px solid #ff0000;
+  box-shadow: 0 8px 16px rgba(255, 0, 0, 0.5); 
+}
+

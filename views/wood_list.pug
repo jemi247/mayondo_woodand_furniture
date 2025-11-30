@@ -20,11 +20,13 @@ block content
         if woodStock.length > 0
           each item in woodStock
             tr 
+              td #{item.woodName}
               td #{item.woodType}
               td #{item.quantity}
               td #{item.supplier}
+              td #{item.salePrice}
               td #{item.dateReceived}
-               td 
+              td 
                 a.btn.btn_primary.btn_block(href=`/wood/${item._id}`) Update
               td 
                 form(action="/deleteWood" method="POST")

@@ -9,13 +9,32 @@ block content
   section
     form(action='/register_furniture' method='POST' enctype="multipart/form-data")
       label Furniture Type:
-      input(type='text' name='furnitureType' placeholder='e.g. Sofa Set' required='')
+      select(name="furnitureType")
+        option(value='' disabled='' selected='') Select Furniture Name
+        option Chair
+        option Table
+        option Sofa
+        option Bed
+        option Wardrobe
+        option Dresser
+        option Cupboard
+        option Dining set
+        option Cabinet
       label Material:
-      input(type='text' name='material' placeholder='e.g. Mahogany' required='')
+      select(name="material")
+        option(value='' disabled='' selected='') Select Material
+        option Mahogany
+        option Acacia
+        option Oak
+        option Pine
+        option Douglas Fir 
+        option Spruce 
+        option Mvule
+        option Eucalyptus
       label Quantity:
       input(type='number' name='quantity' placeholder='' required='')
-      label Price:
-      input(type='number' name='price' required='')
+      label Sale Price (per unit):
+      input(type='number' name='unitPrice' required='')
       label Upload Image:
       input(type='file' name='furnitureImage' placeholder='Furniture image' step='0.01' required='')
       button(type='submit') Register Furniture

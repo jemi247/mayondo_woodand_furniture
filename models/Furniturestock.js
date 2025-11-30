@@ -10,7 +10,7 @@ const furniturestockSchema = new mongoose.Schema({
     quantity: {
         type: Number,
     },
-    price: {
+    unitPrice: {
         type: Number,
     },
     furnitureImage: {

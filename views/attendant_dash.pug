@@ -1,0 +1,18 @@
+extends layout
+block content
+    head
+        meta(charset='UTF-8')
+        title Attendant Dashboard
+        link(rel="stylesheet", href="/css/dashboard.css")
+    header
+        h1 Attendant Dashboard
+        h3 Welcome #{fullName}!
+    nav.sidebar
+        ul.sidebar-links
+            li 
+                a(href='/register_wood') Register Wood
+            li 
+                a(href='/register_furniture') Register Furniture
+            li 
+                a(href='/logout') Logout
+

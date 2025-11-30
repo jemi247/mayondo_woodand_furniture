@@ -1,0 +1,59 @@
+extends layout
+block content
+  head
+    meta(charset='UTF-8')
+    title Register Wood Sale
+    link(rel="stylesheet", href="/css/wood.css")
+  header
+    h1 Register Wood Sale 
+  section
+    form(action='/reg_woodsale' method='POST')
+      label Customer Name:
+      input(type='text' name='customerName' required='')
+      label Wood Name:
+      select(name='woodName') 
+        option(value='' disabled='' selected='') Select Wood Name
+        option Mahogany 
+        option Acacia
+        option Oak
+        option Pine
+        option Douglas Fir
+        option Spruce
+        option Mvule
+        option Eucalyptus
+      label Wood Type:
+      select(name='woodType') 
+        option(value='' disabled='' selected='') Select Wood Type
+        option Hardwood
+        option Softwood
+        option Timber 
+        option Poles
+      label Quantity:
+      input(type='number' name='quantity' required='')
+      label Sale Date:
+      input(type='date' name='saleDate' required='')
+      label Wood Price (per log):
+      input(type='number' name='woodPrice' required='')
+      label Payment Type 
+      select(name='paymentType')
+        option(value='' disabled='' selected='') Select Payment Type
+        option Cash
+        option Cheque 
+        option Bank overdraft
+      label Transport Provided
+      select(name='transportProvided')
+        option(value='' disabled='' selected='') Select Transport Option
+        option(value='true') Yes
+        option(value='false') No
+      label Total Price
+      input(type='number' name='totalPrice' required='')
+      label Sales Agent Name 
+      input(type='text' name='agentName' required='')
+      button(type='submit') Register Wood Sale
+
+
+//-  option(value='' disabled='' selected='') Select Wood Name
+//-           each wood in woodItems
+//-           option(value=wood._id) #{wood.woodName}
+
+ 

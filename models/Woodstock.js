@@ -1,6 +1,9 @@
 const mongoose = require("mongoose")
 
 const woodstockSchema = new mongoose.Schema({
+    woodName: {
+        type: String,
+    },
     woodType: {
         type: String,
     },
@@ -10,12 +13,15 @@ const woodstockSchema = new mongoose.Schema({
     supplier: {
         type: String,
     },
-    price:{
+    unitPrice:{
         type: Number,
     },
     dateReceived: {
         type: Date,
     },
+    salePrice: {
+        type: Number,
+    }
 });
 
 module.exports = mongoose.model('Woodstock', woodstockSchema);
