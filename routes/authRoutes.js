@@ -105,25 +105,55 @@ router.get("/manager_dash", ensureAuthenticated, ensureManager, async(req, res) 
 
     // total furniture quantity
     let totalChairs = await furnitureStock.aggregate([
-        {$match:{furnitureType:'chairs'}},
+        {$match:{furnitureType:'chair'}},
         {$group:{_id:null,
             totalQuantity:{$sum:'$quantity'},
         }}
     ]);
     let totalSofas = await furnitureStock.aggregate([
-        {$match:{furnitureType:'sofas'}},
+        {$match:{furnitureType:'sofa'}},
         {$group:{_id:null,
             totalQuantity:{$sum:'$quantity'},
         }}
     ]);
     let totalCupboards = await furnitureStock.aggregate([
-        {$match:{furnitureType:'cupboards'}},
+        {$match:{furnitureType:'cupboard'}},
         {$group:{_id:null,
             totalQuantity:{$sum:'$quantity'},
         }}
     ]);
     let totalBeds = await furnitureStock.aggregate([
-        {$match:{furnitureType:'beds'}},
+        {$match:{furnitureType:'bed'}},
+        {$group:{_id:null,
+            totalQuantity:{$sum:'$quantity'},
+        }}
+    ]);
+    let totalWardrobes = await furnitureStock.aggregate([
+        {$match:{furnitureType:'wardrobe'}},
+        {$group:{_id:null,
+            totalQuantity:{$sum:'$quantity'},
+        }}
+    ]);
+    let totalTables = await furnitureStock.aggregate([
+        {$match:{furnitureType:'table'}},
+        {$group:{_id:null,
+            totalQuantity:{$sum:'$quantity'},
+        }}
+    ]);
+    let totalDressers = await furnitureStock.aggregate([
+        {$match:{furnitureType:'dresser'}},
+        {$group:{_id:null,
+            totalQuantity:{$sum:'$quantity'},
+        }}
+    ]);
+    let totalDiningSets = await furnitureStock.aggregate([
+        {$match:{furnitureType:'dining set'}},
+        {$group:{_id:null,
+            totalQuantity:{$sum:'$quantity'},
+        }}
+    ]);
+    let totalCabinets = await furnitureStock.aggregate([
+        {$match:{furnitureType:'cabinet'}},
         {$group:{_id:null,
             totalQuantity:{$sum:'$quantity'},
         }}
@@ -133,6 +163,12 @@ router.get("/manager_dash", ensureAuthenticated, ensureManager, async(req, res) 
     totalSofas = totalSofas[0]??{totalQuantity:0};
     totalCupboards = totalCupboards[0]??{totalQuantity:0};
     totalBeds = totalBeds[0]??{totalQuantity:0};
+    totalWardrobes = totalWardrobes[0]??{totalQuantity:0};
+    totalTables = totalTables[0]??{totalQuantity:0};
+    totalDressers = totalDressers[0]??{totalQuantity:0};
+    totalDiningSets = totalDiningSets[0]??{totalQuantity:0};
+    totalCabinets = totalCabinets[0]??{totalQuantity:0};
+
 
     // get all sales
     const woodSales = await woodSale.find().populate('agentName','fullName');
@@ -178,7 +214,13 @@ router.get("/manager_dash", ensureAuthenticated, ensureManager, async(req, res) 
         totalChairs,
         totalSofas,
         totalCupboards,
-        totalBeds
+        totalBeds,
+        totalSales,
+        totalWardrobes,
+        totalTables,
+        totalDressers,
+        totalDiningSets,
+        totalCabinets,
     });     
     } catch (error) {
         console.error(error);

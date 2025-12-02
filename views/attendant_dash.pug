@@ -6,13 +6,13 @@ block content
         link(rel="stylesheet", href="/css/dashboard.css")
     header
         h1 Attendant Dashboard
-        h3 Welcome #{fullName}!
+        h3 Welcome #{currentUser.fullName}!
     nav.sidebar
         ul.sidebar-links
             li 
-                a(href='/register_wood') Register Wood
+                a(href='/register_wood') Register Wood Stock
             li 
-                a(href='/register_furniture') Register Furniture
+                a(href='/register_furniture') Register Furniture Stock
             li 
                 a(href='/logout') Logout
 

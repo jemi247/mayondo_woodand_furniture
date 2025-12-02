@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const furnituresaleSchema = new mongoose.Schema({
+const furnitureSaleSchema = new mongoose.Schema({
     customerName: {
         type: String,
     },
@@ -26,13 +26,13 @@ const furnituresaleSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    totalPrice:{
+    totalPrice: {
         type: Number,
     },
-     agentName: {
+    agentName: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Registration"
     },
 });
 
-module.exports = mongoose.model('Furnituresale', furnituresaleSchema);
+module.exports = mongoose.model('furnitureSale', furnitureSaleSchema);

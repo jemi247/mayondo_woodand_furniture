@@ -6,13 +6,13 @@ block content
         link(rel='stylesheet' href='/css/dashboard.css')
     header
         h1 Sales Agent Dashboard
-        h3 Welcome #{fullName}!
+        h3 Welcome #{currentUser.fullName}!
     nav.sidebar
         ul.sidebar-links
-            li 
-                a(href='/reg_furnituresale') Register Furniture Sale
             li
                 a(href='/reg_woodsale') Register Wood Sale
+            li 
+                a(href='/reg_furnituresale') Register Furniture Sale
             li 
                 a(href='/wood_list') Wood Stock List
             li 

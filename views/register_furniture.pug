@@ -11,30 +11,32 @@ block content
       label Furniture Type:
       select(name="furnitureType")
         option(value='' disabled='' selected='') Select Furniture Name
-        option Chair
-        option Table
-        option Sofa
-        option Bed
-        option Wardrobe
-        option Dresser
-        option Cupboard
-        option Dining set
-        option Cabinet
+        option(value='chair') Chair
+        option(value='table') Table
+        option(value='sofa') Sofa
+        option(value='bed') Bed
+        option(value='wardrobe') Wardrobe
+        option(value='dresser') Dresser
+        option(value='cupboard') Cupboard
+        option(value='dining set') Dining Set
+        option(value='cabinet') Cabinet
       label Material:
       select(name="material")
         option(value='' disabled='' selected='') Select Material
-        option Mahogany
-        option Acacia
-        option Oak
-        option Pine
-        option Douglas Fir 
-        option Spruce 
-        option Mvule
-        option Eucalyptus
+        option(value='mahogany') Mahogany
+        option(value='acacia') Acacia
+        option(value='oak') Oak
+        option(value='pine') Pine
+        option(value='douglas fir') Douglas Fir 
+        option(value='spruce') Spruce 
+        option(value='mvule') Mvule
+        option(value='eucalyptus') Eucalyptus
       label Quantity:
       input(type='number' name='quantity' placeholder='' required='')
       label Sale Price (per unit):
       input(type='number' name='unitPrice' required='')
+      label Date Made: 
+      input(type='date' name='dateMade' required='')
       label Upload Image:
       input(type='file' name='furnitureImage' placeholder='Furniture image' step='0.01' required='')
       button(type='submit') Register Furniture

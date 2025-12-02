@@ -13,9 +13,12 @@ const furniturestockSchema = new mongoose.Schema({
     unitPrice: {
         type: Number,
     },
+    dateMade: {
+        type: Date,
+    },
     furnitureImage: {
         type: String,
     },
 });
 
-module.exports = mongoose.model('Furniturestock', furniturestockSchema);
+module.exports = mongoose.model('furnitureStock', furniturestockSchema);

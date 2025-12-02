@@ -11,30 +11,30 @@ block content
       label Wood Name:
       select(name="woodName" required='')
         option(value='' disabled='' selected='') Select Wood Name
-        option Mahogany
-        option Acacia
-        option Oak
-        option Pine
-        option Douglas Fir 
-        option Spruce 
-        option Mvule
-        option Eucalyptus
+        option(value='mahogany') Mahogany
+        option(value='acacia') Acacia
+        option(value='oak') Oak
+        option(value='pine') Pine
+        option(value='douglas fir') Douglas Fir 
+        option(value='spruce') Spruce 
+        option(value='mvule') Mvule
+        option(value='eucalyptus') Eucalyptus
       label Wood Type:
       select(name="woodType")
         option(value='' disabled='' selected='') Select Wood Type
-        option Hardwood
-        option Softwood
-        option Timber 
-        option Poles
+        option(value='hardwood') Hardwood
+        option(value='softwood') Softwood
+        option(value='timber') Timber 
+        option(value='poles') Poles
       label Quantity (in logs):
       input(type='number' name='quantity' required='')
       label Supplier:
       input(type='text' name='supplier' required='')
       label Cost Price (per log):
-      input(type='text' name='unitPrice' required='')  
+      input(type='number' name='unitPrice' required='')  
       label Date Received:
       input(type='date' name='dateReceived' required='')
       label Sale Price (per log):
-      input(type="text" name="salePrice" required='')
+      input(type="number" name="salePrice" required='')
       button(type='submit') Register Wood Stock
   script(src='/js/mayondo.js')

@@ -56,22 +56,20 @@ router.post('/register_furniture', upload.single('furnitureImage'), async(req, r
 router.get('/wood_list', async(req, res) => {
     try {
         const woodStocks = await woodStock.find();
-        res.render("wood_list", { woodStock })  
+        res.render("wood_list", { woodStocks });  
     } catch (error) {
         console.error(error);
         res.status(500).send("Error retrieving wood stock from the database.");
-        res.redirect("/salesagent_dash")
     }
 });
 
 router.get('/furniture_list', async(req, res) => {
     try {
         const furnitureStocks = await furnitureStock.find();
-        res.render("furniture_list", { furnitureStock })  
+        res.render("furniture_list", { furnitureStocks });  
     } catch (error) {
         console.error(error);
-        res.status(500).send("Error retrieving wood stock from the database.");
-        res.redirect("/salesagent_dash")
+        res.status(500).send("Error retrieving furniture stock from the database.");
     }
 });
 
@@ -99,12 +97,12 @@ router.post('/furniture', async(req, res) => {
 });
 
 // delete furniture
-router.post('/furniture/:id', async(req, res) => {
+router.delete('/furniture/:id', async(req, res) => {
     try {
-    await furnitureStock.deleteOne({_id:req.body.id});
-    res.redirect("/register_furniture")
+    await furnitureStock.findByIdAndDelete(req.params.id);
+    res.send({ message: "Furniture item deleted successfully." });
     } catch (error) {
-        res.status(400).send("Unable to delete item in the DB!")
+        res.status(400).send({message: "Error deleting furniture item."});
         console.log(error);
     }
 });
@@ -131,12 +129,12 @@ router.post('/wood', async(req, res) => {
 });
 
 // delete wood
-router.post('/wood/:id', async(req, res) => {
+router.delete('/wood/:id', async(req, res) => {
     try {
-    await woodStock.deleteOne({_id:req.body.id});
-    res.redirect("/wood_list")
+    await woodStock.findByIdAndDelete(req.params.id);
+    res.send({ message: "Wood item deleted successfully." });
     } catch (error) {
-        res.status(400).send("Unable to delete item in the DB!")
+        res.status(400).send({message: "Error deleting wood item."});
         console.log(error);
     }
 });

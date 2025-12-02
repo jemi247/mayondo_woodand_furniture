@@ -58,10 +58,29 @@ border-radius: 5px;
 border: 1px solid #ccc;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 button {
 margin-top: 20px;
 background-color: green;
 color: white;
 border: none;
 cursor: pointer;
+}
+
+table {
+width: 100%;
+margin: 30px auto;
+border-collapse: collapse;
+border: 1px solid #ccc;
+}
+
+th, td {
+padding: 12px;
+border: 1px solid #ccc;
+text-align: left;
 }

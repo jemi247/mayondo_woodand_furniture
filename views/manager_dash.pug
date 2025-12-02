@@ -6,7 +6,7 @@ block content
         link(rel="stylesheet", href="/css/dashboard.css")
     header
         h1 Manager Dashboard
-        h3 Welcome #{fullName}!
+        h3 Welcome #{currentUser.fullName}!
     nav.sidebar
         ul.sidebar-links 
             li 
@@ -24,6 +24,8 @@ block content
             li 
                 a(href='/furniture_list') Furniture Stock List
             li 
+                a(href='/salesrecords') Sales Records
+            li 
                 a(href='/logout') Logout
     main
         section.cards 
@@ -39,6 +41,11 @@ block content
                 p Quantity of Sofas in stock: #{totalSofas.totalQuantity} Pieces 
                 p Quantity of Cupboards in stock: #{totalCupboards.totalQuantity} Pieces 
                 p Quantity of Beds in stock: #{totalBeds.totalQuantity} Pieces
+                p Quantity of Wardrobes in stock: #{totalWardrobes.totalQuantity} Pieces
+                p Quantity of Tables in stock: #{totalTables.totalQuantity} Pieces
+                p Quantity of Dressers in stock: #{totalDressers.totalQuantity} Pieces
+                p Quantity of Dining Sets in stock: #{totalDiningSets.totalQuantity} Pieces
+                p Quantity of Cabinets in stock: #{totalCabinets.totalQuantity} Pieces
             .card
                 h4 Total Expenses 
                 p Expenses on HardWood: #{totalHardWood.totalCost} UGX

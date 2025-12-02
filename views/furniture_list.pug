@@ -3,34 +3,32 @@ block content
   head
     meta(charset='UTF-8')
     title Registered Furniture Stock
-    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous")
-    header
-      h1 Furniture Stock List
-      <table class="table table-success table-striped-columns">
-        thead 
-          tr
-          th Furniture Type 
-          th Image
-          th Quantity 
-          th Material 
-          th Price 
-          th Update 
-          th Delete
-      tbody 
-        if furnitureStock.length > 0
-          each item in furnitureStock
-            tr 
-              td #{item.furnitureType}
-              td 
-                img(src="/"+ item.furnitureImage alt="furniture image" width="150px" height="170px")
-              td #{item.quantity}
-              td #{item.material}
-              td #{item.price}
-              td 
-                a.btn.btn_primary.btn_block(href=`/furniture/${item._id}`) Update
-              td 
-                form(action="/deleteFurniture" method="POST")
-                  input(type="hidden" name="id" value=item._id)
-                  button.btn.btn_danger.btn_block(type="submit") Delete
+    link(rel="stylesheet", href="/css/furniture.css")
+  header
+    h1 Furniture Stock List
+    <table>
+      thead 
+        tr
+        th Furniture Type 
+        th Image
+        th Quantity 
+        th Material 
+        th Price 
+        th Update 
+        th Delete
+    tbody 
+      if furnitureStocks.length > 0
+        each item in furnitureStocks
+          tr 
+            td #{item.furnitureType}
+            td 
+              img(src="/"+ item.furnitureImage alt="furniture image" width="150px" height="170px")
+            td #{item.quantity}
+            td #{item.material}
+            td #{item.unitPrice}
+            td 
+              a(href=`/furniture/${item._id}`) Update
+            td 
+              button(data-id=`/furniture/${item._id}`) Delete
       </table>
-    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous")
+    

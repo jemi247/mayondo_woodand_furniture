@@ -13,21 +13,21 @@ block content
       label Wood Name:
       select(name='woodName') 
         option(value='' disabled='' selected='') Select Wood Name
-        option Mahogany 
-        option Acacia
-        option Oak
-        option Pine
-        option Douglas Fir
-        option Spruce
-        option Mvule
-        option Eucalyptus
+        option(value='mahogany') Mahogany 
+        option(value='acacia') Acacia
+        option(value='oak') Oak
+        option(value='pine') Pine
+        option(value='douglas_fir') Douglas Fir
+        option(value='spruce') Spruce
+        option(value='mvule') Mvule
+        option(value='eucalyptus') Eucalyptus
       label Wood Type:
       select(name='woodType') 
         option(value='' disabled='' selected='') Select Wood Type
-        option Hardwood
-        option Softwood
-        option Timber 
-        option Poles
+        option(value='hardwood') Hardwood
+        option(value='softwood') Softwood
+        option(value='timber') Timber 
+        option(value='poles') Poles
       label Quantity:
       input(type='number' name='quantity' required='')
       label Sale Date:
@@ -45,8 +45,6 @@ block content
         option(value='' disabled='' selected='') Select Transport Option
         option(value='true') Yes
         option(value='false') No
-      label Total Price
-      input(type='number' name='totalPrice' required='')
       label Sales Agent Name 
       input(type='text' name='agentName' required='')
       button(type='submit') Register Wood Sale

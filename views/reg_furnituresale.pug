@@ -13,29 +13,29 @@ block content
       label Furniture Type:
       select(name="furnitureType")
         option(value='' disabled='' selected='') Select Furniture Type
-        option Chair
-        option Table
-        option Sofa
-        option Bed
-        option Wardrobe
-        option Dresser
-        option Cupboard
-        option Dining set
-        option Cabinet
+        option(value='chair') Chair
+        option(value='table') Table
+        option(value='sofa') Sofa
+        option(value='bed') Bed
+        option(value='wardrobe') Wardrobe
+        option(value='dresser') Dresser
+        option(value='cupboard') Cupboard
+        option(value='dining_set') Dining set
+        option(value='cabinet') Cabinet
       label Material:
       select(name='material')
         option(value='' disabled='' selected='') Select Material
-        option Mahogany
-        option Acacia
-        option Oak
-        option Pine
-        option Douglas Fir 
-        option Spruce 
-        option Mvule
-        option Eucalyptus
+        option(value='mahogany') Mahogany
+        option(value='acacia') Acacia
+        option(value='oak') Oak
+        option(value='pine') Pine
+        option(value='douglas_fir') Douglas Fir 
+        option(value='spruce') Spruce 
+        option(value='mvule') Mvule
+        option(value='eucalyptus') Eucalyptus
       label Quantity:
       input(type='number' name='quantity' required='')
-      label Furniture Price: 
+      label Furniture Price (per unit): 
       input(type="number" name="furniturePrice" required='')
       label Sale Date:
       input(type='date' name='saleDate' required='')
@@ -50,8 +50,6 @@ block content
         option(value='' disabled='' selected='') Select Transport Option
         option(value='true') Yes
         option(value='false') No
-      label Total Price
-      input(type='number' name='totalPrice' required='')
       label Sales Agent Name 
       input(type='text' name='agentName' required='')
       button(type='submit') Register Furniture Sale

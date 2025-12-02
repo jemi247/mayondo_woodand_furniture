@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const woodsaleSchema = new mongoose.Schema({
+const woodSaleSchema = new mongoose.Schema({
     customerName: {
         type: String,
     },
@@ -20,6 +20,9 @@ const woodsaleSchema = new mongoose.Schema({
         type: Number,
     },
     paymentType: {
+        type: String,
+    },
+    transportProvided: {
         type: Boolean,
         default: false,
     },
@@ -32,4 +35,4 @@ const woodsaleSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Woodsale', woodsaleSchema);
+module.exports = mongoose.model('woodSale', woodSaleSchema);

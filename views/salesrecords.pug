@@ -1,0 +1,65 @@
+extends layout
+block content
+    head
+        meta(charset='UTF-8')
+        title Registered Sales
+        link(rel="stylesheet", href="/css/sales.css")
+    header
+        h1 Sales Records
+        <table>
+        thead 
+            th Wood Sales
+            tr
+            th Customer Name
+            th Wood Name
+            th Wood Type
+            th Quantity 
+            th Sale Date
+            th Wood Price
+            th Payment Type
+            th Transport Provided
+            th Total Price
+            th Sales Agent
+        tbody 
+        if woodSales.length > 0
+            each item in woodSales
+                tr 
+                td #{item.customerName}
+                td #{item.woodName}
+                td #{item.woodType}
+                td #{item.quantity}
+                td #{item.saleDate}
+                td #{item.woodPrice}
+                td #{item.paymentType}
+                td #{item.transportProvided}
+                td #{item.totalPrice}
+                td #{item.agentName}
+        thead 
+            th Furniture Sales
+            tr
+            th Customer Name
+            th Furniture Type
+            th Material
+            th Quantity 
+            th Furniture Price 
+            th Sale Date 
+            th Payment Type
+            th Transport Provided
+            th Total Price
+            th Sales Agent
+        tbody 
+        if furnitureSales.length > 0
+            each item in furnitureSales
+                tr 
+                td #{item.customerName}
+                td #{item.furnitureType}
+                td #{item.material}
+                td #{item.quantity}
+                td #{item.furniturePrice}
+                td #{item.saleDate}
+                td #{item.paymentType}
+                td #{item.transportProvided}
+                td #{item.totalPrice}
+                td #{item.agentName}
+        </table>
+    

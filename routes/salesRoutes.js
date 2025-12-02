@@ -1,6 +1,9 @@
 const express= require('express');
 const router = express.Router();
 const {ensureAuthenticated, ensureManager, ensureSalesAgent} = require('../customMiddleware/auth')
+
+const furnitureStock = require("../models/Furniturestock");
+const woodStock = require("../models/Woodstock");
 const woodSale = require("../models/Woodsale");
 const furnitureSale = require("../models/Furnituresale");
 
@@ -10,8 +13,8 @@ router.get("/reg_furnituresale", (req,res) => {
 
 router.post("/reg_furnituresale", async(req,res) => {
     try {
-        const { customerName, furnitureName, furnitureType, quantity, saleDate, paymentType, transportProvided, agentName, totalPrice } = req.body;
-        const stocks = await furnitureStock.find({furnitureName:furnitureType})
+        const { customerName, furnitureType, quantity, furniturePrice, saleDate, paymentType, transportProvided, agentName } = req.body;
+        const stocks = await furnitureStock.find({furnitureType:furnitureType})
         if(!stocks || stocks.length === 0)
             return res.status(400).send("Stock not found!")
         // calculate total available quantity across all stock entries
@@ -19,16 +22,17 @@ router.post("/reg_furnituresale", async(req,res) => {
         if(totalAvailable < Number(quantity))
             return res.status(400).send("Insufficient stock!")
         // calculate total price
-        let total = salePrice * Number(quantity)
+        let total = furniturePrice * Number(quantity)
         if(transportProvided)
             total *= 1.05;
         const sale = new furnitureSale({
             customerName, 
             furnitureType, 
-            quantity, 
+            quantity,
+            furniturePrice, 
             saleDate, 
             paymentType, 
-            agentname: req.user._id,
+            agentName: req.user._id,
             transportProvided: !!transportProvided,
             totalPrice: total
         })
@@ -55,8 +59,8 @@ router.get("/reg_woodsale", (req,res) => {
 
 router.post("/reg_woodsale", async(req,res) => {
     try {
-        const { customerName, woodName, woodType, quantity, saleDate, woodPrice, paymentType, transportProvided, agentName, totalPrice } = req.body;
-        const stocks = await woodStock.find({woodName:woodType})
+        const { customerName, woodName, woodType, quantity, saleDate, woodPrice, paymentType, transportProvided, agentName} = req.body;
+        const stocks = await woodStock.find({woodName:woodName, woodType:woodType})
         if(!stocks || stocks.length === 0)
             return res.status(400).send("Stock not found!")
         // calculate total available quantity across all stock entries
@@ -64,16 +68,17 @@ router.post("/reg_woodsale", async(req,res) => {
         if(totalAvailable < Number(quantity))
             return res.status(400).send("Insufficient stock!")
         // calculate total price
-        let total = salePrice * Number(quantity)
+        let total = woodPrice * Number(quantity)
         if(transportProvided)
             total *= 1.05;
         const sale = new woodSale({
             customerName, 
+            woodName,
             woodType, 
             quantity, 
             saleDate, 
             paymentType, 
-            agentname: req.user._id,
+            agentName: req.user._id,
             transportProvided: !!transportProvided,
             totalPrice: total
         })
@@ -91,10 +96,19 @@ router.post("/reg_woodsale", async(req,res) => {
     } catch (error) {
         console.error(error);
         res.status(500).send("Server error");
-    }
-   
+    }   
 });
 
+router.get('/salesrecords', async(req, res) => {
+    try {
+        const woodSales = await woodSale.find().populate('agentName');
+        const furnitureSales = await furnitureSale.find().populate('agentName');
+        res.render("salesrecords", { woodSales, furnitureSales });  
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server error");
+    }
+});
 
 module.exports = router;
 

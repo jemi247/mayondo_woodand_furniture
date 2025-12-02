@@ -8,7 +8,7 @@ const woodstockSchema = new mongoose.Schema({
         type: String,
     },
     quantity: {
-        type: String,
+        type: Number,
     },
     supplier: {
         type: String,
@@ -24,4 +24,4 @@ const woodstockSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Woodstock', woodstockSchema);
+module.exports = mongoose.model('woodStock', woodstockSchema);
